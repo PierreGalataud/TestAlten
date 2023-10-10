@@ -17,13 +17,16 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+    @Transactional
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
 
+    @Transactional
     public void addNewProduct(Product product) {
         productRepository.save(product);
     }
+    @Transactional
     public Optional<Product> getProductsById(Long productId) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if (optionalProduct.isPresent()){
@@ -36,6 +39,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public void deleteProduct(Long productId) {
         boolean exists = productRepository.existsById(productId);
         if(!exists){
